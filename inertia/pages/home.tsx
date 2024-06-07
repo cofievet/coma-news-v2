@@ -1,17 +1,25 @@
 import { Head } from '@inertiajs/react'
+import React from 'react'
 
-export default function Home(props: { version: number }) {
+export default function Home(props: any) {
+  const { articles } = props
   return (
     <>
       <Head title="Homepage" />
 
-      <div className="container">
-        <div className="title text-red-500">AdonisJS {props.version} x Inertia x React</div>
+      <h1>Welcome to Inertia.js</h1>
 
-        <span>
-          Learn more about AdonisJS and Inertia.js by visiting the{' '}
-          <a href="https://docs.adonisjs.com/guides/inertia">AdonisJS documentation</a>.
-        </span>
+      <div className="flex gap-10 flex-col">
+        {articles?.map((article: any) => (
+          <React.Fragment key={article.id}>
+            <div className="py-2">
+              <h2 className="text-xl bold">{article.title}</h2>
+              <p>{article.content}</p>
+              <p>By {article.user.name}</p>
+            </div>
+            <hr />
+          </React.Fragment>
+        ))}
       </div>
     </>
   )
