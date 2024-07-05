@@ -1,7 +1,5 @@
 import { Head } from '@inertiajs/react'
-import { CircularProgress, Grid, Typography } from '@mui/material'
-import React from 'react'
-import ArticleCard from '../pages/article_card/article_card'
+import ArticleCard from '../components/article_card'
 
 export default function Home(props: any) {
   const { articles } = props
@@ -9,17 +7,13 @@ export default function Home(props: any) {
     <>
       <Head title="Homepage" />
 
-      <h1>Welcome to Inertia.js</h1>
+      <h1 className="text-2xl">Last articles</h1>
 
-      <Grid container spacing={2} padding={2}>
+      <div className="my-8 grid grid-cols-1 gap-2 md:grid-cols-3">
         {articles.map((article: any) => (
-          <React.Fragment key={article.id}>
-            <Grid item xs={12}>
-              <ArticleCard article={article} />
-            </Grid>
-          </React.Fragment>
+          <ArticleCard key={article.id} article={article} />
         ))}
-      </Grid>
+      </div>
 
       {/* <div className="flex gap-10 flex-col">
         {articles?.map((article: any) => (

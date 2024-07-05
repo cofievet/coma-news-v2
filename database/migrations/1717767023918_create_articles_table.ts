@@ -9,6 +9,9 @@ export default class extends BaseSchema {
 
       table.string('title').notNullable()
       table.text('content').notNullable()
+      table.text('resume').nullable()
+      table.text('author').notNullable()
+      table.text('source').notNullable()
       table.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE')
 
       table.timestamp('created_at')
