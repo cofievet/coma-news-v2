@@ -12,7 +12,8 @@ import {
 import IosShareIcon from '@mui/icons-material/IosShare'
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt'
 import { red } from '@mui/material/colors'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { Link } from '@inertiajs/react'
 
 export default function ArticleCard(props: any) {
   const { article } = props
@@ -33,7 +34,7 @@ export default function ArticleCard(props: any) {
         subheader={
           <>
             <div>{article.user.name}</div>
-            <div>{article.createdAt}</div>
+            {/* <div>{article.createdAt}</div> */}
           </>
         }
       />
@@ -45,7 +46,7 @@ export default function ArticleCard(props: any) {
       </CardContent>
       <CardActions>
         {/* <Button size="small" onClick={() => goToArticle(article)}> */}
-        <Button size="small">Go to article</Button>
+        <Link href={`/article/${article.id}`} type='button'>Go to article</Link>
         {/* <IconButton>
           <IosShareIcon />
         </IconButton>
