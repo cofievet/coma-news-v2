@@ -7,7 +7,7 @@ export default function Home(props: any) {
     <>
       <Head title="Homepage" />
 
-      <h1>Welcome to Inertia.js COUCOU</h1>
+      <h1>Welcome to Inertia.js</h1>
 
       <div className="flex gap-10 flex-col">
         {articles?.map((article: any) => (
