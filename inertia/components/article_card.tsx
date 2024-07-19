@@ -2,7 +2,6 @@ import { Link } from '@inertiajs/react'
 
 export default function ArticleCard(props: any) {
   const { article } = props
-  console.log(article)
   return (
     <div className=" flex flex-col gap-4 rounded-md shadow-lg shadow-100 p-4">
       <div className="flex-1 flex flex-col gap-2">
