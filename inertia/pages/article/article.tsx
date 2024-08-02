@@ -1,13 +1,16 @@
-import { useParams } from 'react-router-dom';
+import Article from '#models/article'
+import ArticleRender from '~/components/article_render'
 
-export default function Article(props: any) {
-  const { id } = props
+interface IarticleProps {
+  article: Article
+}
+
+export default function ArticlePage(props: IarticleProps) {
   return (
     <>
       <div>
-            <h1>Article {id}</h1>
-            {/* Render the content of the article here */}
-        </div>
+        <ArticleRender {...props.article} />
+      </div>
     </>
   )
 }
