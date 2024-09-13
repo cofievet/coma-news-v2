@@ -8,7 +8,7 @@
 */
 
 const HomeController = () => import('#controllers/home_controller')
-const ArticleController = () => import('#controllers/article_controller')
+const ArticlesController = () => import('#controllers/articles_controller')
 import router from '@adonisjs/core/services/router'
 
 import { middleware } from './kernel.js'
@@ -33,4 +33,4 @@ router
   })
   .use(middleware.auth())
 
-router.get('/articles/:id', [ArticleController, 'render']).as('article')
+router.get('/articles/:id', [ArticlesController, 'render']).as('article')
