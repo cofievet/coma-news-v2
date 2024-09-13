@@ -21,9 +21,9 @@ router.get('/', [HomeController, 'render']).as('home')
 
 router
   .group(() => {
-    router.get('/register', [RegistersController, 'render']).as('register')
+    router.get('/register', [RegistersController, 'render']).as('register.render')
     router.post('/register', [RegistersController, 'execute']).as('register.execute')
-    router.get('/login', [LoginController, 'render']).as('login')
+    router.get('/login', [LoginController, 'render']).as('login.render')
     router.post('/login', [LoginController, 'execute']).as('login.execute')
   })
   .use(middleware.guest())
@@ -31,8 +31,10 @@ router
 router
   .group(() => {
     router.post('/logout', [LogoutController, 'execute']).as('logout')
+    router.get('/create-article', [CreateArticlesController, 'render']).as('create_article.render')
+    router
+      .post('/create-article', [CreateArticlesController, 'execute'])
+      .as('create_article.execute')
+    router.get('/articles/:id', [ArticlesController, 'render']).as('article.render')
   })
   .use(middleware.auth())
-
-router.get('/articles/:id', [ArticlesController, 'render']).as('article')
-router.get('/create-article', [CreateArticlesController, 'render']).as('create_article')
