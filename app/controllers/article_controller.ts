@@ -3,10 +3,11 @@
 import { HttpContext } from "@adonisjs/core/http"
 import Article from "../models/article.js"
 
-export default class ArticlesController {
-  async render({ inertia }: HttpContext) {
-    const article = await Article.query().preload('user').first()
+export default class ArticleController {
+  async render(httpContext : HttpContext) {
+    const articleId = httpContext.request.params().id
+    const article = await Article.query().where('id', articleId).preload('user').first()
     
-    return inertia.render('article/article', { article })
+    return httpContext.inertia.render('article/article', { article })
   }
 }
