@@ -21,6 +21,26 @@ export default function InputGroup({
   placeholder,
   onChange,
 }: IinputGroup) {
+  if (type === "textarea") {
+    return (
+      <div className="flex flex-col gap-4">
+        <label htmlFor={name}>{label}</label>
+        <textarea
+          required
+          id={id}
+          name={name}
+          value={value}
+          placeholder={placeholder}
+          className="p-3 border-2 rounded"
+          autoComplete="off"
+          data-lpignore="true"
+          data-form-type="other"
+          onChange={(event) => onChange(`${field}`, event.target.value)}
+        />
+        {error && <span className="text-red-500 font-bold">{error}</span>}
+      </div>
+    )
+  }
   return (
     <div className="flex flex-col gap-4">
       <label htmlFor={name}>{label}</label>
