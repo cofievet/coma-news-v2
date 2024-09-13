@@ -12,6 +12,7 @@ const ArticlesController = () => import('#controllers/articles_controller')
 import router from '@adonisjs/core/services/router'
 
 import { middleware } from './kernel.js'
+const CreateArticlesController = () => import('#controllers/article/create_articles_controller')
 const LogoutController = () => import('#controllers/auth/logout_controller')
 const RegistersController = () => import('#controllers/auth/registers_controller')
 const LoginController = () => import('#controllers/auth/login_controller')
@@ -34,3 +35,4 @@ router
   .use(middleware.auth())
 
 router.get('/articles/:id', [ArticlesController, 'render']).as('article')
+router.get('/create-article', [CreateArticlesController, 'render']).as('create_article')
