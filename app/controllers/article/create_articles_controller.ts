@@ -37,6 +37,12 @@ export default class CreateArticlesController {
     article.source = url
 
     if (url.includes('eurosport.fr')) {
+      const eurosportTags = [
+        '[data-testid=atom-body-paragraph]',
+        '[data-testid=atom-body-h2]',
+        '[data-testid=atom-body-blockquote] > div > blockquote',
+      ]
+
       const title = $('h1').text()
       const resume = $('h2').text()
       const author = $(
@@ -44,9 +50,17 @@ export default class CreateArticlesController {
       ).text()
 
       let content = ''
-      const articleChildrens = $('div[data-testid=atom-body]').children()
-      for (const articleChildren of articleChildrens) {
-        const elementToAdd = $(articleChildren).find('[data-testid=atom-body-paragraph]')[0]
+      const articleChildren = $('div[data-testid=atom-body]').children()
+      for (const articleChild of articleChildren) {
+        let elementToAdd = null
+
+        for (const tag of eurosportTags) {
+          if (!isNullOrUndefined(elementToAdd)) {
+            break
+          }
+
+          elementToAdd = $(articleChild).find(tag)[0]
+        }
 
         if (elementToAdd && $(elementToAdd).prop('outerHTML') !== '') {
           content = content.concat($(elementToAdd).prop('outerHTML')!)
@@ -61,4 +75,8 @@ export default class CreateArticlesController {
 
     return article
   }
+}
+
+function isNullOrUndefined(value: any) {
+  return value === undefined || value === null
 }
