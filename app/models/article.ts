@@ -14,6 +14,15 @@ export default class Article extends BaseModel {
   declare content: string
 
   @column()
+  declare resume: string
+
+  @column()
+  declare source: string
+
+  @column()
+  declare author: string
+
+  @column()
   declare userId: number
 
   @column.dateTime({ autoCreate: true })

@@ -3,11 +3,12 @@ services:
   db:
     image: postgres:14-alpine
     container_name: postgresDb
+    restart: always
     ports:
-      - 5432:5432
+      - 127.0.0.1:5432:5432
     volumes:
       - ~/apps/postgres:/var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD=P@ssword
       - POSTGRES_USER=postgres
-      - POSTGRES_DB=Booky
+      - POSTGRES_DB=comaNews

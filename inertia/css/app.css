@@ -3,3 +3,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.button-action {
+    background-color: blue;
+    color: white;
+    padding: 5px;
+    border: 2px solid darkblue;
+    border-radius: 5px;
+    box-shadow: 6px 6px 1px 1px rgba(0, 0, 255, .2);
+}
+
+.article-card {
+    background-color: #77889977;
+}
+
+.title-banner {
+    display: flex;
+    justify-content: space-between;
+}
