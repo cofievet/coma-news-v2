@@ -19,6 +19,8 @@ const LoginController = () => import('#controllers/auth/login_controller')
 
 router.get('/', [HomeController, 'render']).as('home')
 
+router.post('/create-article', [CreateArticlesController, 'execute'])
+
 router
   .group(() => {
     router.get('/register', [RegistersController, 'render']).as('register.render')
@@ -32,9 +34,6 @@ router
   .group(() => {
     router.post('/logout', [LogoutController, 'execute']).as('logout')
     router.get('/create-article', [CreateArticlesController, 'render']).as('create_article.render')
-    router
-      .post('/create-article', [CreateArticlesController, 'execute'])
-      .as('create_article.execute')
     router.get('/articles/:id', [ArticlesController, 'render']).as('article.render')
   })
   .use(middleware.auth())

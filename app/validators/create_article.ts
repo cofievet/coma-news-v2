@@ -7,6 +7,6 @@ export const createArticleValidator = vine.compile(
     resume: vine.string().trim(),
     source: vine.string().trim(),
     author: vine.string().trim(),
-    user_id: vine.number().positive().nullable(),
+    user_id: vine.number().optional(),
   })
 )

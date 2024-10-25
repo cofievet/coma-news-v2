@@ -1,7 +1,6 @@
 import { Head, useForm } from '@inertiajs/react'
 
 import InputGroup from '~/components/input_group'
-import React from 'react'
 
 export default function RegisterPage() {
   const { data, setData, post, processing, errors } = useForm({
@@ -23,7 +22,7 @@ export default function RegisterPage() {
       <Head title="Register" />
       <div className="p-28 flex flex-col gap-10">
         <h1 className="text-3xl title">
-          Hi, Welcome to <span className="text-primary">Cona News</span>
+          Hi, Welcome to <span className="text-primary">Coma News</span>
         </h1>
         <hr className="divide-gray-800" />
         <form autoComplete="off" onSubmit={handleSubmit} className="flex flex-col gap-12">
