@@ -8,7 +8,6 @@ export default function ArticleCard(props: any) {
   // const navigate = useNavigate()
   function goToArticle(article: Article) {
     // navigate(`/articles/${article.id}`, { state: { article: article } }).
-    console.log('Go to article', article)
   }
 
   return (

@@ -1,4 +1,3 @@
-import Article from '#models/article'
 import { createArticleValidator } from '#validators/create_article'
 import type { HttpContext } from '@adonisjs/core/http'
 import axios from 'axios'
@@ -33,7 +32,13 @@ export default class CreateArticlesController {
     if (!$) {
       throw new Error('Error while fetching the source URL')
     }
-    const { title, content, resume, author } = this.generateHtml(data.source, $)
+
+    const dataArticle = this.generateHtml(data.source, $)
+    if (dataArticle === null) {
+      throw new Error('The source URL is not supported')
+    }
+
+    const { title, resume, author, content } = dataArticle
 
     const newArticle = await this.articleRepository.create({
       userId: auth.user!.id,
@@ -47,17 +52,20 @@ export default class CreateArticlesController {
   }
 
   generateHtml(url: string, $: cheerio.CheerioAPI) {
-    let article = new Article()
-    article.source = url
-
     if (url.includes('eurosport.fr')) {
+      // Eurosport paragraphes, titles and blockquotes
       const eurosportTags = [
         '[data-testid=atom-body-paragraph]',
         '[data-testid=atom-body-h2]',
         '[data-testid=atom-body-blockquote] > div > blockquote',
       ]
+      const eurosportAttrToRemove = [
+        'data-testid',
+        'class',
+      ]
 
       const title = $('h1').text()
+      // Résumé de l'article
       const resume = $('h2').text()
       const author = $(
         'div[data-testid=molecule-author-banner] > div > div:nth-child(1) > a'
@@ -77,6 +85,12 @@ export default class CreateArticlesController {
         }
 
         if (elementToAdd && $(elementToAdd).prop('outerHTML') !== '') {
+          for (const attr of eurosportAttrToRemove) {
+            $(elementToAdd).removeAttr(attr)
+            for(const child of $(elementToAdd).children()) {
+              $(child).removeAttr(attr)
+            }
+          }
           content = content.concat($(elementToAdd).prop('outerHTML')!)
         }
       }
@@ -89,7 +103,7 @@ export default class CreateArticlesController {
       }
     }
 
-    return article
+    return null
   }
 }
 

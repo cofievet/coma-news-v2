@@ -6,7 +6,6 @@ interface ArticleProps {
 
 export default function ArticlePage(props: ArticleProps) {
   const { article } = props;
-  console.log("Article", article);
   return (
     <>
       <h1>{article.title}</h1>

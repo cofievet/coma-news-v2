@@ -9,7 +9,6 @@ export default class LoginController {
   }
 
   async execute({ request, response, auth, inertia }: HttpContext) {
-    console.log('test')
     const data = await request.validateUsing(loginValidator)
     try {
       const user = await User.verifyCredentials(data.email, data.password)
