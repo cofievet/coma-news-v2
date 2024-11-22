@@ -1,14 +1,7 @@
 import { Link } from '@inertiajs/react'
-import { useNavigate } from 'react-router-dom'
-import Article from '../../app/models/article'
 
 export default function ArticleCard(props: any) {
   const { article } = props
-  
-  // const navigate = useNavigate()
-  function goToArticle(article: Article) {
-    // navigate(`/articles/${article.id}`, { state: { article: article } }).
-  }
 
   return (
     <div className=" flex flex-col gap-4 rounded-md shadow-lg shadow-100 p-4 article-card">

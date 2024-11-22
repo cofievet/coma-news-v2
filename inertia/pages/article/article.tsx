@@ -1,38 +1,26 @@
-import Article from '../../../app/models/article';
+import Article from '../../../app/models/article'
 
 interface ArticleProps {
-  article: Article;
+  article: Article
 }
 
 export default function ArticlePage(props: ArticleProps) {
-  const { article } = props;
+  const { article } = props
   return (
-    <>
-      <h1>{article.title}</h1>
-      <h3>
-        {article.source}, le {String(article.createdAt)}
-      </h3>
-      {/* <img
-        src={article.image}
-        alt={article.alt}
-        style={{ display: "grid", margin: "auto" }}
-        height='194'
-      ></img> */}
-      {/* <i
-        style={{
-          display: "grid",
-          margin: "auto",
-          width: "fit-content",
-          fontSize: "x-small",
-          color: "grey",
-        }}
-      >
-        {article.alt}
-      </i> */}
+    <div className="flex flex-col gap-10">
+      <h1 className="text-4xl text-center font-bold article-font">{article.title}</h1>
+      <div className="flex flex-col gap-0 justify-center items-center">
+        <div className="secondary-font text-secondary">
+          Par <span className="font-bold">{article.author}</span>
+        </div>
+        <div className="secondary-font text-secondary">
+          Le <span>{article.createdAt.toLocaleString()}</span>
+        </div>
+      </div>
       <div
-        style={{ padding: "20px 5px" }}
+        className="article-text-body article-font"
         dangerouslySetInnerHTML={{ __html: article.content }}
       />
-    </>
+    </div>
   )
 }

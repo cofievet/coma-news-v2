@@ -59,10 +59,7 @@ export default class CreateArticlesController {
         '[data-testid=atom-body-h2]',
         '[data-testid=atom-body-blockquote] > div > blockquote',
       ]
-      const eurosportAttrToRemove = [
-        'data-testid',
-        'class',
-      ]
+      const eurosportAttrToRemove = ['data-testid', 'class']
 
       const title = $('h1').text()
       // Résumé de l'article
@@ -87,7 +84,7 @@ export default class CreateArticlesController {
         if (elementToAdd && $(elementToAdd).prop('outerHTML') !== '') {
           for (const attr of eurosportAttrToRemove) {
             $(elementToAdd).removeAttr(attr)
-            for(const child of $(elementToAdd).children()) {
+            for (const child of $(elementToAdd).children()) {
               $(child).removeAttr(attr)
             }
           }
