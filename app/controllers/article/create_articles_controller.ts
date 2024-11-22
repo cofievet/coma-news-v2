@@ -3,23 +3,26 @@ import { createArticleValidator } from '#validators/create_article'
 import type { HttpContext } from '@adonisjs/core/http'
 import axios from 'axios'
 import * as cheerio from 'cheerio'
+import { ArticleRepository } from '../../repositories/article_repository.js'
+import { inject } from '@adonisjs/core'
 
+@inject()
 export default class CreateArticlesController {
+  constructor(private articleRepository: ArticleRepository) {}
+
   render({ inertia }: HttpContext) {
     return inertia.render('article/create_article')
   }
 
   async execute({ request, response, auth }: HttpContext) {
     const data = await request.validateUsing(createArticleValidator)
-
-    let article = new Article()
+    let $ = null
 
     await axios
       .get(data.source)
       .then((res) => {
         if (res.status === 200) {
-          const $ = cheerio.load(res.data)
-          article = this.generateHtml(data.source, $)
+          $ = cheerio.load(res.data)
         }
       })
       .catch((error) => {
@@ -27,8 +30,19 @@ export default class CreateArticlesController {
         throw new Error('Error while fetching the source URL')
       })
 
-    article.userId = auth.user!.id
-    const newArticle = await Article.create(article)
+    if (!$) {
+      throw new Error('Error while fetching the source URL')
+    }
+    const { title, content, resume, author } = this.generateHtml(data.source, $)
+
+    const newArticle = await this.articleRepository.create({
+      userId: auth.user!.id,
+      source: data.source,
+      author,
+      content,
+      resume,
+      title,
+    })
     return response.redirect().toRoute('article.render', { id: newArticle.id })
   }
 
@@ -67,10 +81,12 @@ export default class CreateArticlesController {
         }
       }
 
-      article.title = title
-      article.resume = resume
-      article.author = author
-      article.content = content
+      return {
+        title,
+        resume,
+        author,
+        content,
+      }
     }
 
     return article
