@@ -22,7 +22,7 @@ createInertiaApp({
       import.meta.glob('../pages/**/*.tsx')
     )
 
-    setLayout(name, page)
+    setLayout(page)
 
     return page
   },

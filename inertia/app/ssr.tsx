@@ -11,7 +11,7 @@ export default function render(page: any) {
 
       const pageRendered = pages[`../pages/${name}.tsx`]
 
-      setLayout(name, pageRendered)
+      setLayout(pageRendered)
 
       return pageRendered
     },
