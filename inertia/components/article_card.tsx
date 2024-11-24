@@ -13,7 +13,7 @@ export default function ArticleCard(props: any) {
         </div>
       </div>
       <div className="flex flex-auto">
-        <Link className="button-action" href={`/articles/${article.id}`} as="button">
+        <Link className="button-action" href={`/articles/${article.id}`} as="a">
           Go to article
         </Link>
         {/* <button onClick={() => navigate(`/articles/${article.id}`, { state: { article: article } })}>

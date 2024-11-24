@@ -1,4 +1,3 @@
-version: '3.9'
 services:
   db:
     image: postgres:14-alpine
@@ -11,4 +10,4 @@ services:
     environment:
       - POSTGRES_PASSWORD=P@ssword
       - POSTGRES_USER=postgres
-      - POSTGRES_DB=comaNews
+      - POSTGRES_DB=ComaNews

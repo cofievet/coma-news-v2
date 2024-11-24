@@ -1,11 +1,10 @@
-import Article from '../../../app/models/article'
+import ArticleViewModel from '../../../app/view_models/article_view_model'
 
 interface ArticleProps {
-  article: Article
+  article: ArticleViewModel
 }
 
-export default function ArticlePage(props: ArticleProps) {
-  const { article } = props
+export default function ArticlePage({ article }: ArticleProps) {
   return (
     <div className="flex flex-col gap-10">
       <h1 className="text-4xl text-center font-bold article-font">{article.title}</h1>
@@ -14,7 +13,7 @@ export default function ArticlePage(props: ArticleProps) {
           Par <span className="font-bold">{article.author}</span>
         </div>
         <div className="secondary-font text-secondary">
-          Le <span>{article.createdAt.toLocaleString()}</span>
+          Le <span>{article.createdAt}</span>
         </div>
       </div>
       <div
