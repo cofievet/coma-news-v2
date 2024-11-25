@@ -1,3 +1,4 @@
+import { Link } from '@inertiajs/react'
 import ArticleViewModel from '../../../app/view_models/article_view_model'
 
 interface ArticleProps {
@@ -15,6 +16,14 @@ export default function ArticlePage({ article }: ArticleProps) {
         <div className="secondary-font text-secondary">
           Le <span>{article.createdAt}</span>
         </div>
+        <Link
+          href={article.source}
+          className="secondary-font text-secondary hover:underline font-semibold"
+          target="_blank"
+          as="a"
+        >
+          Voir l'original
+        </Link>
       </div>
       <div
         className="article-text-body article-font"
