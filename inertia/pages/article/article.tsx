@@ -6,12 +6,17 @@ interface ArticleProps {
 
 export default function ArticlePage(props: ArticleProps) {
   const { article } = props;
+  const date = new Date(article.createdAt.toString());
+  const daysOfWeek = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+    
   return (
     <>
-      <h1>{article.title}</h1>
+      <h1 style={{ fontSize: "40px", fontWeight: 'bold' }}>{article.title}</h1>
       <h3>
-        {article.source}, le {String(article.createdAt)}
+        <a href={article.source} target='_blank' style={{ fontSize : "15px", color:'blue', textDecoration: 'underline', textDecorationColor: 'blue'}}>{article.source}</a>
+        <div style={{ fontSize: "14px", paddingBottom: "10px", fontStyle: 'italic' }}>le {daysOfWeek[date.getDay()]} {date.toLocaleDateString("fr-FR")} à {date.toLocaleTimeString("fr-FR")}</div>
       </h3>
+      <h2 style={{ fontSize: "20px"}}>{article.resume}</h2>
       {/* <img
         src={article.image}
         alt={article.alt}
@@ -30,7 +35,7 @@ export default function ArticlePage(props: ArticleProps) {
         {article.alt}
       </i> */}
       <div
-        style={{ padding: "20px 5px" }}
+        style={{ padding: "20px 0px" }}
         dangerouslySetInnerHTML={{ __html: article.content }}
       />
     </>

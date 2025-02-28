@@ -17,6 +17,7 @@ export default function ArticleCard(props: any) {
         <div className="flex flex-col gap-1">
           <span>{article.author}</span>
           <span>{article.source}</span>
+          <span>{article.resume}</span>
         </div>
       </div>
       <div className="flex flex-auto">
