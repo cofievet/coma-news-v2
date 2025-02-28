@@ -2,10 +2,12 @@
 /// <reference path="../../config/inertia.ts" />
 
 import '../css/app.css'
-import { hydrateRoot } from 'react-dom/client'
+import '../css/base.css'
+
 import { createInertiaApp } from '@inertiajs/react'
+import { hydrateRoot } from 'react-dom/client'
 import { resolvePageComponent } from '@adonisjs/inertia/helpers'
-import { Layout } from '~/components/layout'
+import { setLayout } from './helper'
 
 const appName = import.meta.env.VITE_APP_NAME || 'AdonisJS'
 
@@ -20,10 +22,7 @@ createInertiaApp({
       import.meta.glob('../pages/**/*.tsx')
     )
 
-    // @ts-expect-error - Page is not typed
-    page.default.layout =
-      // @ts-expect-error - Page is not typed
-      page.default.layout || ((children: ReactNode) => <Layout children={children} />)
+    setLayout(page)
 
     return page
   },

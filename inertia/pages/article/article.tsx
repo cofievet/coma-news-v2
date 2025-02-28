@@ -1,43 +1,34 @@
-import Article from '../../../app/models/article';
+import { Link } from '@inertiajs/react'
+import ArticleViewModel from '../../../app/view_models/article_view_model'
 
 interface ArticleProps {
-  article: Article;
+  article: ArticleViewModel
 }
 
-export default function ArticlePage(props: ArticleProps) {
-  const { article } = props;
-  const date = new Date(article.createdAt.toString());
-  const daysOfWeek = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
-    
+export default function ArticlePage({ article }: ArticleProps) {
   return (
-    <>
-      <h1 style={{ fontSize: "40px", fontWeight: 'bold' }}>{article.title}</h1>
-      <h3>
-        <a href={article.source} target='_blank' style={{ fontSize : "15px", color:'blue', textDecoration: 'underline', textDecorationColor: 'blue'}}>{article.source}</a>
-        <div style={{ fontSize: "14px", paddingBottom: "10px", fontStyle: 'italic' }}>le {daysOfWeek[date.getDay()]} {date.toLocaleDateString("fr-FR")} à {date.toLocaleTimeString("fr-FR")}</div>
-      </h3>
-      <h2 style={{ fontSize: "20px"}}>{article.resume}</h2>
-      {/* <img
-        src={article.image}
-        alt={article.alt}
-        style={{ display: "grid", margin: "auto" }}
-        height='194'
-      ></img> */}
-      {/* <i
-        style={{
-          display: "grid",
-          margin: "auto",
-          width: "fit-content",
-          fontSize: "x-small",
-          color: "grey",
-        }}
-      >
-        {article.alt}
-      </i> */}
+    <div className="flex flex-col gap-10">
+      <h1 className="text-4xl text-center font-bold article-font">{article.title}</h1>
+      <div className="flex flex-col gap-0 justify-center items-center">
+        <div className="secondary-font text-secondary">
+          Par <span className="font-bold">{article.author}</span>
+        </div>
+        <div className="secondary-font text-secondary">
+          Le <span>{article.createdAt}</span>
+        </div>
+        <Link
+          href={article.source}
+          className="secondary-font text-secondary hover:underline font-semibold"
+          target="_blank"
+          as="a"
+        >
+          Voir l'original
+        </Link>
+      </div>
       <div
-        style={{ padding: "20px 0px" }}
+        className="article-text-body article-font"
         dangerouslySetInnerHTML={{ __html: article.content }}
       />
-    </>
+    </div>
   )
 }

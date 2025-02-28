@@ -75,10 +75,7 @@ export default class CreateArticlesController {
         '[data-testid=atom-body-h2]',
         '[data-testid=atom-body-blockquote] > div > blockquote',
       ]
-      const eurosportAttrToRemove = [
-        'data-testid',
-        'class',
-      ]
+      const eurosportAttrToRemove = ['data-testid', 'class']
 
       const title = $('h1').text()
       // Résumé de l'article

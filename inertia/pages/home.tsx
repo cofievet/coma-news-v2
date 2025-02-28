@@ -1,5 +1,5 @@
-import { Head } from '@inertiajs/react'
 import ArticleCard from '../components/article_card'
+import { Head } from '@inertiajs/react'
 import { Link } from '@inertiajs/react'
 
 export default function Home(props: any) {
@@ -10,7 +10,7 @@ export default function Home(props: any) {
 
       <div className="title-banner">
         <h1 className="text-2xl">Last articles</h1>
-        <Link className="button-action" href={`/create-article/`} as="button">
+        <Link className="button-action" href={`/create-article/`} as="a">
           Add new article
         </Link>
       </div>
