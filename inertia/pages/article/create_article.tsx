@@ -6,9 +6,10 @@ export default function ArticlePage() {
   const { data, setData, post, processing, errors } = useForm({
     source:
       // 'https://www.eurosport.fr/football/mls/2024/la-messi-cam-lexperience-intrigante-de-la-mls_sto20048094/story.shtml',
-      // 'https://www.lequipe.fr/Rugby/Actualites/Deux-changements-pour-l-angleterre-contre-le-japon/1521950',
+      'https://www.lequipe.fr/Rugby/Actualites/Deux-changements-pour-l-angleterre-contre-le-japon/1521950',
       // 'https://www.lequipe.fr/Basket/Actualites/La-nuit-des-bleus-en-nba-avec-sarr-et-coulibaly-washington-signe-une-belle-remontee-au-score-mais-perd-contre-phoenix/1532816',
-      'https://www.lerugbynistere.fr/news/champions-cup-buros-out-jalibert-et-bielle-biarrey-pour-animer-la-composition-de-lubb-face-aux-sharks-1701251422.php',
+      // 'https://www.lerugbynistere.fr/news/champions-cup-buros-out-jalibert-et-bielle-biarrey-pour-animer-la-composition-de-lubb-face-aux-sharks-1701251422.php',
+      // 'https://www.eurosport.fr/rugby/6-nations/2025/xv-de-france-ce-sentiment-diniquite-qui-revolte-les-bleus-cela-ne-peut-pas-etre-toujours-en-notre-defaveur_sto21049264/story.shtml',
   })
 
   const handleSubmit = (event: React.SyntheticEvent) => {

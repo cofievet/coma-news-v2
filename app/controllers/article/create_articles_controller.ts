@@ -84,7 +84,8 @@ export default class CreateArticlesController {
         'div[data-testid=molecule-author-banner] > div > div:nth-child(1) > a'
       ).text()
 
-      let content = this.GetContent($, eurosportTags, eurosportAttrToRemove, 'div[data-testid=atom-body]')
+      let content = this.GetContentRecursively($, $('div[data-testid=atom-body]'))
+
 
       return {
         title,
@@ -107,8 +108,8 @@ export default class CreateArticlesController {
       // Résumé de l'article
       const resume = $('h2[class=Article__chapo]').text()
       const author = "lequipe.fr"
-
-      let content = this.GetContent($, [], [], 'div[class=article__body]')      
+  
+      let content = this.GetContentRecursively($, $('div[class=article__body]'))  
 
       return {
         title,
@@ -157,6 +158,7 @@ export default class CreateArticlesController {
       const author = "lerugbynistere.fr"
 
       let content = this.GetContent($, [], [], 'div[class=ms-article__body]')
+      // let content = this.GetContentRecursively($, $('div[class=ms-article__body]'))
 
       return {
         title,
@@ -193,5 +195,16 @@ export default class CreateArticlesController {
 
     }
     return content
+  }
+
+  private GetContentRecursively($: cheerio.CheerioAPI, parentElement: any) {
+    const articleChildren = parentElement.children()
+    for (const articleChild of articleChildren) {
+      this.GetContentRecursively($, $(articleChild)) 
+    }
+    if ($(parentElement).prop('outerHTML') !== '') {           
+      return $(parentElement).prop('outerHTML')
+    }
+    return ''
   }
 }
