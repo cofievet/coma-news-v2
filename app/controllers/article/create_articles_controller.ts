@@ -2,12 +2,15 @@ import { createArticleValidator } from '#validators/create_article'
 import type { HttpContext } from '@adonisjs/core/http'
 import axios from 'axios'
 import * as cheerio from 'cheerio'
-import { ArticleRepository } from '../../repositories/article_repository.js'
+import { ArticleRepository } from '#repositories/article_repository'
 import { inject } from '@adonisjs/core'
+import ExtractArticle from '#services/extract_article'
 
 @inject()
 export default class CreateArticlesController {
-  constructor(private articleRepository: ArticleRepository) {}
+  constructor(
+    private articleRepository: ArticleRepository,
+    private extractArticle: ExtractArticle) {}
 
   render({ inertia }: HttpContext) {
     return inertia.render('article/create_article')
@@ -84,7 +87,7 @@ export default class CreateArticlesController {
         'div[data-testid=molecule-author-banner] > div > div:nth-child(1) > a'
       ).text()
 
-      let content = this.GetContentRecursively($, $('div[data-testid=atom-body]'))
+      let content = this.extractArticle.GetContentRecursively($, $('div[data-testid=atom-body]'))
 
 
       return {
@@ -109,7 +112,7 @@ export default class CreateArticlesController {
       const resume = $('h2[class=Article__chapo]').text()
       const author = "lequipe.fr"
   
-      let content = this.GetContentRecursively($, $('div[class=article__body]'))  
+      let content = this.extractArticle.GetContentRecursively($, $('div[class=article__body]'))  
 
       return {
         title,
@@ -195,16 +198,5 @@ export default class CreateArticlesController {
 
     }
     return content
-  }
-
-  private GetContentRecursively($: cheerio.CheerioAPI, parentElement: any) {
-    const articleChildren = parentElement.children()
-    for (const articleChild of articleChildren) {
-      this.GetContentRecursively($, $(articleChild)) 
-    }
-    if ($(parentElement).prop('outerHTML') !== '') {           
-      return $(parentElement).prop('outerHTML')
-    }
-    return ''
   }
 }
